@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Carbon Footprint Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <center><h1>Carbon Footprint Calculator</h1></center>
+
+    <form id="carbonForm">
+
+        <table>
+            <tr>
+                <td>
+                    <label>Gender:</label>
+                </td>
+                <td>
+                    <input type="radio" name="gender" id="Male">  Male</input>
+                    <input type="radio" name="gender" id="Female"> Female</input>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Food Type:</label></td>
+                <td>
+                    <select id="foodType">
+                        <option>Select an option</option>
+                        <option value="prepackaged">Prepackaged Convenience Food</option>
+                        <option value="balanced">Balanced (Fresh and Convenient)</option>
+                        <option value="fresh">Fresh, Locally Grown, or Hunted Food</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td> <label>Meat Choice:</label></td>
+                <td>
+                    <select id="meatChoice">
+                        <option>Select an option</option>
+                        <option value="daily">Domestic Meat Daily</option>
+                        <option value="fewTimesWeekly">Domestic Meat Few Times Weekly</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan or Wild Meat</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Water Consumption:</label></td>
+                <td>
+                    <select id="waterConsumption">
+                        <option>Select an option</option>
+                        <option value="moreThan9">More than 9 times per week</option>
+                        <option value="4To9">4 to 9 times per week</option>
+                        <option value="1To3">1 to 3 times per week</option>
+                        <option value="noDishwasher">No Dishwasher</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Item Purchase Per Year:</label></td>
+                <td>
+                    <select id="itemPurchase">
+                        <option>Select an option</option>
+                        <option value="moreThan7">More than 7 items</option>
+                        <option value="5To7">5 to 7 items</option>
+                        <option value="3To5">3 to 5 items</option>
+                        <option value="lessThan3">Less than 3 items</option>
+                        <option value="almostNothing">Almost nothing or secondhand items</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Encouraging Recycling:</label></td>
+                <td>
+                    <select id="encourageRecycling">
+                        <option>Select an option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="paper" value="paper"> Paper
+                </td>
+                <td>
+                    <input type="checkbox" id="glass" value="glass"> Glass
+                </td>
+                <td>
+                    <input type="checkbox" id="pet" value="pet"> PET
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="rubber" value="rubber"> Rubber
+                </td>
+                <td>
+                    <input type="checkbox" id="aluminumCans" value="aluminumCans"> Aluminum Cans
+                </td>
+                <td>
+                    <input type="checkbox" id="metals" value="metals"> Metals
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="foodWaste" value="foodWaste"> Food Waste
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr>
+                <td>
+                    <label>Do you own a car</label>
+                </td>
+                <td>
+                    <input type="radio" name="car-owner" id="carYes"> Yes
+                </td>
+                <td>
+                    <input type="radio" name="car-owner" id="carNo"> No
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr>
+                <td> <label for="distance-Traveled">How far you travel with public transportation</label></td>
+                <td>
+                    <select name="Distance-Traveled" id="disTraveled">
+                        <option>Select an option</option>
+                        <option value="1">more than 15,000 miles per year.</option>
+                        <option value="2">travel 10,000 to 15,000 miles per year.</option>
+                        <option value="3">you travel 1,000 to 10,000 miles per year.</option>
+                        <option value="4">travel less than 1,000 miles per year.</option>
+                        <option value="5">do not use public transportation.</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td> <label for="For-flights">For flights</label></td>
+                <td>
+                    <select name="forFlights" id="forFlights">
+                        <option>Select an option</option>
+                        <option value="1">travel short distances in 1 year(such as within your state)</option>
+                        <option value="2">you travel further distances(such as to a nearby state or country)</option>
+                        <option value="3">travel far(such as to another continent)</option>
+                        <option value="4">You do not travel by flight</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+       <center>
+        <button type="button" onclick="calculateCarbonFootprint()">Calculate</button>
+       </center>
+
+    </form>
+
+    <div id="result"></div>
+
+
+    </div>
+   
+    <script>
+        function calculateCarbonFootprint() {
+            let points = 0;
+
+            const Male = document.getElementById("Male").checked;
+            const Female = document.getElementById("Female").checked;
+            const foodType = document.getElementById('foodType').value;
+            const meatChoice = document.getElementById('meatChoice').value;
+            const waterConsumption = document.getElementById('waterConsumption').value;
+            const itemPurchase = document.getElementById('itemPurchase').value;
+            const encourageRecycling = document.getElementById('encourageRecycling').value;
+            const carYes = document.getElementById("carYes").checked;
+            const carNes = document.getElementById("carNo").checked;
+            const disTraveled = parseInt(document.getElementById('disTraveled').value);
+            const forFlights = parseInt(document.getElementById('forFlights').value);
+
+           
+
+            if (carYes) {
+                points += 10;
+            } else {
+                points += 0;
+            }
+
+            if (Male) {
+                points += 8;
+            } else {
+                points += 0;
+            }
+
+            if (disTraveled === 1) {
+                points += 12;
+            } else if (disTraveled === 2) {
+                points += 10;
+            } else if (disTraveled === 3) {
+                points += 6;
+            } else if (disTraveled === 4) {
+                points += 4
+            } else {
+                points += 0
+            }
+
+            if (forFlights === 1) {
+                points += 2;
+            } else if (forFlights === 2) {
+                points += 6;
+            } else if (forFlights === 3) {
+                points += 20;
+            } else {
+                points += 0;
+            }
+
+            switch (foodType) {
+                case 'prepackaged':
+                    points += 12;
+                    break;
+                case 'balanced':
+                    points += 6;
+                    break;
+                case 'fresh':
+                    points += 2;
+                    break;
+            }
+
+            switch (meatChoice) {
+                case 'daily':
+                    points += 10;
+                    break;
+                case 'fewTimesWeekly':
+                    points += 8;
+                    break;
+                case 'vegetarian':
+                    points += 4;
+                    break;
+                case 'vegan':
+                    points += 2;
+                    break;
+            }
+
+            switch (waterConsumption) {
+                case 'moreThan9':
+                    points += 3;
+                    break;
+                case '4To9':
+                    points += 2;
+                    break;
+                case '1To3':
+                    points += 1;
+                    break;
+                // 'noDishwasher' doesn't add any points
+            }
+
+            switch (itemPurchase) {
+                case 'moreThan7':
+                    points += 10;
+                    break;
+                case '5To7':
+                    points += 8;
+                    break;
+                case '3To5':
+                    points += 6;
+                    break;
+                case 'lessThan3':
+                    points += 4;
+                    break;
+                case 'almostNothing':
+                    points += 2;
+                    break;
+            }
+
+            points += (encourageRecycling === 'yes') ? -10 : 10;
+
+            const recyclableItems = ['paper', 'glass', 'pet', 'rubber', 'aluminumCans', 'metals', 'foodWaste'];
+            recyclableItems.forEach(item => {
+                const checkbox = document.getElementById(item);
+                if (checkbox.checked) {
+                    points -= 4;
+                }
+            });
+
+            displayResult(points);
+        }
+
+        function displayResult(points) {
+            const resultDiv = document.getElementById('result');
+            let resultText = '';
+
+            const name = prompt("Please Input name");
+
+
+           let validPhone = false;
+           while (!validPhone) {
+             // phoneNumber validation
+             const phoneNumber =  prompt("Please Input Phone Number")
+            // check the email
+            const phoneChecker = /^\d{11}$/;
+            // result after check
+            if (phoneChecker.test(phoneNumber)) {
+                 validPhone = true;
+                alert("Valid phoneNumber address: " + phoneNumber);
+            } else {
+                alert("Invalid Phone Number address. Please enter a valid phone Number.")
+            }
+           };
+
+           let validEmail = false;
+           while (!validEmail) {
+             // phoneNumber validation
+             const email =  prompt("Please Inpute email")
+            // check the email
+            const emailChecker = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // result after check
+            if (emailChecker.test(email)) {
+                validEmail = true;
+                alert("Valid email address: " + email);
+            } else {
+                alert("Invalid email address. Please enter a valid email.")
+            }
+           };
+
+            if (points > 60) {
+                resultText = `your carbon footprint is high. You are using more than allocated for an average human. Reduce your carbon footprint.`;
+            } else if (points >= 30 && points <= 60) {
+                resultText = `You are doing okay but can be better. Try to reduce your carbon footprint.`;
+            } else {
+                resultText = `You're a climate champion. Keep up the good work!`;
+            }
+
+            resultDiv.innerHTML = `<p>Your total carbon footprint points: ${points}</p><p>Dear ${name}, ${resultText}</p>`;
+        }
+    </script>
+</body>
+</html>

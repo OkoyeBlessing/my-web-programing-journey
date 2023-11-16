@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.8;
+    margin-left: 70px;
+    margin-right: 70px;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: aliceblue;
+}
+
+h1 {
+    color: rgb(0, 70, 70);
+    background-color: white;
+    border-top: 2px solid aqua;
+    border-bottom: 2px solid aqua;
+}
+
+form {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 3px rgba(9, 40, 40, 0.123);
+    width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+table {
+    width: 470px;
+}
+
+label {
+    color: rgb(0, 70, 70);
+    font-weight: 700;
+}
+
+p {
+    color: rgb(0, 70, 70);
+    font-weight: 700;
+}
+
+select {
+    border: 0px;
+    border-bottom: 2px solid aqua;
+    background-color: white;
+    width: 200px;
+}
+
+button {
+    background-color: aqua;
+    width: 200px;
+    padding: 7px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 1000;
+}
+
+input {
+    border-bottom: 2px solid aqua;
+}
+
+#result {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 3px rgba(0, 255, 255, 0.305);
+    border: 2px solid aqua;
+    width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    margin: 10px auto;
+}
